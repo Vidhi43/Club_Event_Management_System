@@ -1,0 +1,107 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+   <meta charset="UTF-8">  
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   <title>MIT-ADT CLUB EVENT MANAGEMENT</title>  
+   <link rel="stylesheet" href="Mem's contact.css">  
+   <style>
+    body {
+      background-image: url(background.jpeg);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+    }
+    
+    /* Dropdown container */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown button (image) */
+    .dropbtn img {
+      width: 70px; /* Size of the image */
+      height: 70px;
+      cursor: pointer;
+    }
+
+    /* Dropdown content (hidden by default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 100px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    /* Dropdown content links */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .separator {
+          height: 0.5px;
+          background-color: #000000; /* Color of the line */
+          margin: 1px; /* Remove margin */
+        }
+
+    /* Hover effect for dropdown links */
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Show the dropdown menu when the button is clicked */
+    .show {
+      display: block;
+    }
+</style>
+</head>  
+<body>  
+   <header>  
+      <img src="12.png" alt="MIT-ADT University Logo" width="200" height="70">  
+      <nav>  
+        <ul>  
+          <li><a href="mem_home.html">DASHBOARD</a></li>  
+          <li><a href="mem_about.html">ABOUT US</a></li>  
+          <li><a href="mem_contact.html">CONTACT</a></li>  
+          <div class="dropdown">
+           <div class="dropbtn" onclick="toggleDropdown()">
+             <img src="1.png" alt="main menu">
+           </div>
+           <div id="myDropdown" class="dropdown-content">
+             <a href="mem_acc.html">Account</a>
+              <div class="separator"></div>
+              <a href="#">Log Out</a>
+            </div>
+         </div>
+        </ul>  
+      </nav>  
+   </header>  
+   <div class="contact-container">
+    <div class="contact-item">
+        <span class="icon"><a href="https://www.google.com/maps/search/mit+adt/@18.4864843,74.0176209,14z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI0MDkyOS4wIKXMDSoASAFQAw%3D%3D">📍</a></span>
+        <p>MIT Art, Design and Technology University,<br>
+            Rajbaugh Loni Kalbhor, Solapur Highway,<br>
+            Near Bharat Petrol Pump Loni Kalbhor Railway Station,<br>
+            Pune - 412201, Maharashtra India.</p>
+    </div>
+
+    <div class="contact-item">
+        <span class="icon">📞</span>
+        <p>020- 26912901 / 02 / 03 ,<br>9595124234</p>
+    </div>
+
+    <div class="contact-item">
+        <span class="icon">🕒</span>
+        <p>Office hours: <strong>9:00 am to 4:30 pm</strong> (except holidays)</p>
+    </div>
+</div>
+<script src="script .js"></script>
+</body>
+</html>

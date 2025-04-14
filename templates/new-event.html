@@ -1,0 +1,162 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+   <meta charset="UTF-8">  
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   <title>MIT-ADT CLUB EVENT MANAGEMENT</title>  
+   <link rel="stylesheet" href="new event.css">  
+   <style>
+    body {
+      background-image: url(background.jpeg);
+      background-repeat: no-repeat;
+      background-attachment:scroll;
+      background-size: 100% 100%;
+    } /* Dropdown container */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown button (image) */
+    .dropbtn img {
+      width: 70px; /* Size of the image */
+      height: 70px;
+      cursor: pointer;
+    }
+
+    /* Dropdown content (hidden by default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 100px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    /* Dropdown content links */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .separator {
+          height: 0.5px;
+          background-color: #000000; 
+          margin: 1px; 
+        }
+
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .show {
+      display: block;
+    }
+</style>
+</head>  
+<body>  
+   <header>  
+      <img src="12.png" alt="MIT-ADT University Logo" width="200" height="70">  
+      <nav>  
+        <ul>  
+          <li><a href="mem_home.html">DASHBOARD</a></li>  
+          <li><a href="mem_about.html">ABOUT US</a></li>  
+          <li><a href="mem_contact.html">CONTACT</a></li>  
+          <div class="dropdown">
+           <div class="dropbtn" onclick="toggleDropdown()">
+             <img src="1.png" alt="main menu">
+           </div>
+           <div id="myDropdown" class="dropdown-content">
+             <a href="mem_acc.html">Account</a>
+              <div class="separator"></div>
+              <a href="#">Log Out</a>
+            </div>
+         </div>
+        </ul>  
+      </nav>  
+   </header>  
+   <main>  
+    <style>
+        body {
+          background-image: url(background.jpeg);
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: 100% 100%;
+        }
+    </style>
+    <section class="form-container">
+        <h1>Add Event</h1>
+        <form action="submit_event.php" method="post" enctype="multipart/form-data">
+           <label for="event-name">Event Name:</label>
+           <input type="text" id="event-name" name="event_name" placeholder="Enter event name" required>
+           
+           <label for="event-details">Event Details:</label>
+           <textarea id="event-details" name="event_details" rows="4" placeholder="Enter event details" required></textarea>
+           
+           <label for="venue">Venue:</label>
+           <input type="text" id="venue" name="venue" placeholder="Enter venue" required>
+           
+           <label for="timings">Timings:</label>
+           <input type="datetime-local" id="timings" name="timings" required>
+           
+           <label for="poster">Event Poster:</label>
+           <input type="file" id="poster" name="poster" accept="image/*,video/*" required>
+           
+           <button type="submit" onclick="submitEvent(event)">Submit Event</button>
+        </form>
+     </section>
+  </main>  
+  <script src="script .js"></script>  
+  <script>
+    async function submitEvent() {
+        console.log("hit")
+        event.preventDefault()
+        const eventname = document.getElementById("event-name").value;
+        const club = document.getElementById("event-details").value;
+        const token = localStorage.getItem('token');
+        const type = localStorage.getItem('type')
+        console.log(eventname, club, type, token)
+        const apiUrl = 'http://localhost:3000/put-event'; // Replace with your actual API URL
+        const requestData = {
+          type:type,
+          token:token,
+            eventname:eventname,
+            club:club // Replace with your test password
+        };
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data)
+                window.location.href = '/mem_home.html';
+                  // Set your redirect URL here
+
+
+            } else if (response.status === 401) {
+                window.alert('Invalid credentials. Please try again.');
+            } else if (response.status === 404) {
+                window.alert('Not found.');
+            } else {
+                console.error('An error occurred:', response.status, response.statusText, response.body);
+            }
+        } catch (error) {
+            console.error('Error making the API call:', error);
+        }
+    }
+
+</script>
+</body>  
+</html>

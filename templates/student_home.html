@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIT-ADT CLUB EVENT MANAGEMENT</title>
+  <link rel="stylesheet" href="Stud's home.css">
+  <style>
+    body {
+      background-image: url(background.jpeg);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+    }
+
+    /* Dropdown container */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown button (image) */
+    .dropbtn img {
+      width: 70px;
+      /* Size of the image */
+      height: 70px;
+      cursor: pointer;
+    }
+
+    /* Dropdown content (hidden by default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 100px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    /* Dropdown content links */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .separator {
+      height: 0.5px;
+      background-color: #000000;
+      /* Color of the line */
+      margin: 1px;
+      /* Remove margin */
+    }
+
+    /* Hover effect for dropdown links */
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Show the dropdown menu when the button is clicked */
+    .show {
+      display: block;
+    }
+
+    .image1,
+    .image2,
+    .image3 {
+      width: 300px;
+      /* Adjust the width and height as needed */
+      height: 200px;
+      overflow: hidden;
+      /* Hide the part of the image that’s being wiped in */
+      position: relative;
+      margin-bottom: 20px;
+      /* Space between images */
+    }
+
+    /* Images within the container */
+    .image1 img,
+    .image2 img,
+    .image3 img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: -100%;
+      /* Start the image off the screen */
+      animation: wipeEffect 2s forwards;
+      /* Apply wipe effect */
+    }
+
+    /* Keyframes for wipe effect */
+    @keyframes wipeEffect {
+      0% {
+        left: -100%;
+        /* Start offscreen */
+      }
+
+      100% {
+        left: 0;
+        /* End with the image fully visible */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="12.png" alt="MIT-ADT University Logo" width="200" height="70">
+    <nav>
+      <ul>
+        <li><a href="student_home.html">DASHBOARD</a></li>
+        <li><a href="student_about.html">ABOUT US</a></li>
+        <li><a href="student_contact.html">CONTACT</a></li>
+        <div class="dropdown">
+          <div class="dropbtn" onclick="toggleDropdown()">
+            <img src="1.png" alt="main menu">
+          </div>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="student_acc.html">Account</a>
+            <div class="separator"></div>
+            <a href="#">Log Out</a>
+          </div>
+        </div>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <style>
+      body {
+        background-image: url(background.jpeg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+      }
+    </style>
+
+    <section class="image1">
+
+      <img src="sculpting.jpg" alt="Sculpting">
+    </section>
+    <section class="image3">
+      <img src="photography.jpg" alt="photography">
+    </section>
+    <section class="image2">
+
+      <img src="trekking.jpg" alt="Canyon trip">
+    </section>
+    <section class="event">
+      <h1 style="font-family: 'Georgia', serif">E V E N T S</h1>
+    </section>
+    <section class="events">
+      <ul id="event-list"> <!-- Changed from <ul> to <ul id="event-list"> for easier selection -->
+      </ul>
+    </section>
+
+  </main>
+
+  <script src="script .js"></script>
+  <script>
+    async function loadEvents() {
+      try {
+        const token = localStorage.getItem('token');
+        const type = localStorage.getItem('type')
+        console.log(token, type)
+        const requestData = {
+                token:token,
+                type:type // Replace with your test password
+            };
+
+        const apiUrl = 'http://localhost:3000/fetch-event'; // Replace with your actual API URL
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestData)
+        });
+
+        if (response.ok) {
+          const events = await response.json();
+          const eventList = document.getElementById('event-list');
+          console.log(events)
+          // Clear existing list items
+          eventList.innerHTML = '';
+
+          events.forEach(event => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                    <a href="#"><h3>${event.eventname}</h3></a>
+                    <li> <b>BY ${event.club}</b></li>
+                    <hr>
+                `;
+            eventList.appendChild(listItem);
+          });
+        } else {
+          console.error('Failed to load events:', response.status, response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching the events:', error);
+      }
+    }
+
+    // Load events when the page is ready
+    document.addEventListener('DOMContentLoaded', loadEvents);
+
+  </script>
+</body>
+
+</html>

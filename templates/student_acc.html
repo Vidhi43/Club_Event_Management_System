@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Account</title>
+  <link rel="stylesheet" href="Stud's acc.css">
+  <style>
+    body {
+      background-image: url(background.jpeg);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+    }
+
+    /* Dropdown container */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown button (image) */
+    .dropbtn img {
+      width: 70px;
+      /* Size of the image */
+      height: 70px;
+      cursor: pointer;
+    }
+
+    /* Dropdown content (hidden by default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 100px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    /* Dropdown content links */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .separator {
+      height: 0.5px;
+      background-color: #000000;
+      /* Color of the line */
+      margin: 1px;
+      /* Remove margin */
+    }
+
+    /* Hover effect for dropdown links */
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Show the dropdown menu when the button is clicked */
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="12.png" alt="MIT-ADT University Logo" width="200" height="70">
+    <nav>
+      <ul>
+        <li><a href="student_home.html">DASHBOARD</a></li>
+        <li><a href="student_about.html">ABOUT US</a></li>
+        <li><a href="student_contact.html">CONTACT</a></li>
+        <div class="dropdown">
+          <div class="dropbtn" onclick="toggleDropdown()">
+            <img src="1.png" alt="main menu">
+          </div>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="student_acc.html">Account</a>
+            <div class="separator"></div>
+            <a href="#">Log Out</a>
+          </div>
+        </div>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="account-info">
+    <h2>Account Info</h2>
+    <div class="info-box">
+      <p>Name: <span id="name"></span></p>
+      <p>Enrollment Number: <span id="enrollment"></span></p>
+      <p>Phone Number: <span id="phone"></span></p>
+      <p>Email: <span id="email"></span></p>
+      <p>Branch: <span id="branch"></span></p>
+      <p>Current Year: <span id="current-year"></span></p>
+      <p>Graduating Year: <span id="grad-year"></span></p>
+
+    </div>
+  </div>
+
+  <!-- <div class="registered-events">
+    <h3>Registered Events</h3>
+    <div class="event">
+      <ul>
+        <li> <a href="#">Event 1 </a> </li>
+        <p><a>by Club 1</a> </p>
+        <p align="right">Venue: IT Building 6th Floor</p>
+        <p align="right">Date: 09/09/24 Time: 10 A.M.</p>
+      </ul>
+    </div>
+    <div class="event">
+      <ul>
+        <li> <a href="#">Event 2 </a> </li>
+        <p><a>by Club 1</a> </p>
+        <p align="right">Venue: IT Building 6th Floor</p>
+        <p align="right">Date: 09/09/24 Time: 10 A.M.</p>
+      </ul>
+    </div> -->
+
+  </div>
+  <script src="script .js"></script>
+  <script>
+    async function fetchStudentData() {
+      const username = localStorage.getItem('username');
+      console.log(username)
+      const apiUrl = 'http://localhost:3000/student-info'; // Replace with your API URL
+
+      try {
+        // Sending the username in a POST request to the API
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username: username })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+
+          // Populate the HTML elements with the data
+          if(localStorage.getItem("type")==="student"){
+
+            document.getElementById('name').textContent = data.name;
+            document.getElementById('enrollment').textContent = data.enrollment;
+            document.getElementById('phone').textContent = data.phone;
+            document.getElementById('email').textContent = data.email;// Assuming 'username' is the club name
+            document.getElementById('branch').textContent = data.branch;
+            document.getElementById('current-year').textContent = data.currentYear;
+            document.getElementById('grad-year').textContent = data.gradYear;
+          }else{
+            window.alert("You're not a student")
+          }
+        } else {
+          console.error('Failed to fetch data', response.status);
+          window.alert('Failed to fetch data');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // This should be dynamically set based on user input or session data
+
+    // Call the function to fetch the data when the page loads
+    document.addEventListener('DOMContentLoaded', () => fetchStudentData());
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link rel="stylesheet" href="Login for stud.css">
+    <style>
+        body {
+            background-image: url(background.jpeg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="12.png" alt="MIT-ADT University Logo" width="200" height="70">
+        <nav>
+            <ul>
+                <li><a href="Login Page.html">LOGIN</a></li>
+                <li><a href="contact2.html">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="login">
+        <div class="container">
+            <div class="screen">
+                <div class="screen__content">
+                    <h2>For Student</h2>
+                    <form class="login">
+                        <div class="login__field">
+                            <i class="login__icon fas fa-user"></i>
+                            <input type="text" class="login__input" id="student-username" placeholder="User name">
+                        </div>
+                        <div class="login__field">
+                            <i class="login__icon fas fa-lock"></i>
+                            <input type="password" class="login__input" id="student-password" placeholder="Password">
+                        </div>
+                        <button type="button" class="button login__submit" onclick="loginStudent(event)">
+                            <span class="button__text">Log In Now</span>
+                            <i class="button__icon fas fa-chevron-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="script .js"></script>
+
+    <script>
+        async function loginStudent() {
+            console.log("hit")
+            event.preventDefault()
+            const username = document.getElementById("student-username").value;
+            const password = document.getElementById("student-password").value;
+            console.log(username, password)
+
+            const apiUrl = 'http://localhost:3000/login'; // Replace with your actual API URL
+            const requestData = {
+                username: username, // Replace with your test username
+                password: password // Replace with your test password
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('username', username);
+                    console.log(username)
+                    localStorage.setItem('type', data.type);
+                    localStorage.setItem('token', data._id);
+                    console.log('Login successful:', data);
+                    window.location.href = '/student_home.html';  // Set your redirect URL here
+
+
+                } else if (response.status === 401) {
+                    window.alert('Invalid credentials. Please try again.');
+                } else if (response.status === 404) {
+                    window.alert('User not found.');
+                } else {
+                    console.error('An error occurred:', response.status, response.statusText, response.body);
+                }
+            } catch (error) {
+                console.error('Error making the API call:', error);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

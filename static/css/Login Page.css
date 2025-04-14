@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+}
+
+header {  
+    background: linear-gradient( #460971, #893498);  
+    color: white;  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+    padding: 10px 30px; 
+    height: 100px;
+ }  
+
+ img {
+    margin-left: 40px;
+  }
+
+ nav ul {  
+    display: flex;  
+    list-style-type: none;  
+ }  
+   
+ nav ul li {  
+    margin-left: 20px;  
+    margin-top: 21px;
+ }  
+   
+ nav ul li a {  
+    color: white;  
+    text-decoration: none;  
+ }  
+
+ nav ul img {
+    margin-left: 20px ;
+    margin-top: none;
+ }
+ .container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+.screen {		
+	background: linear-gradient(to right, #7e0a98, #e96913);  
+   margin-top: -50px;
+	height: 300px;
+	width: 360px;	
+	box-shadow: 0px 0px 24px #5C5696;
+}
+
+.screen__content {
+	z-index: 1;
+	position: relative;	
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+	height: 100%;
+}
+
+.screen__buttons {
+    display: flex; /* Enables Flexbox layout */
+    flex-direction: column; /* Aligns items vertically */
+    align-items: center; /* Centers buttons horizontally */
+    gap: 10px; /* Adds space between buttons */
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 0.3px;
+}
+
+.screen__buttons button {
+    background-color: #ffffff;
+    color: rgb(49, 49, 49);
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    
+}

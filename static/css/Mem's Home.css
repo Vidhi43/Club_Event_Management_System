@@ -1,0 +1,129 @@
+body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+ }  
+   
+ header {  
+    background: linear-gradient( #460971, #893498);  
+    color: white;  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+    padding: 10px 30px;  
+ }  
+
+ img {
+   margin-left: 40px;
+ }
+ nav ul {  
+    display: flex;  
+    list-style-type: none;  
+ }  
+   
+ nav ul li {  
+    margin-left: 20px;  
+    margin-top: 21px;
+ }  
+   
+ nav ul li a {  
+    color: white;  
+    text-decoration: none;  
+ }  
+
+ nav ul img {
+    margin-left: 20px ;
+    margin-top: none;
+ }
+   
+
+ .menu-toggle {  
+    display: none;  
+ }  
+   
+ main {  
+    display: flex;  
+    padding: 20px;  
+ } 
+ .event {
+    margin-right: 190px;
+    margin-left: 400px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+ }
+   
+ .events {  
+    background: linear-gradient(to right, #7e0a98, #e96913);  
+    color: white;  
+    padding: 20px;  
+    border-radius: 60px;  
+    height: auto;
+    width: 600px;
+    margin-left: 100px ;
+    margin-top: 100px ;
+ }  
+   
+ .events ul {  
+    list-style-type: none;  
+    padding: 0;  
+ }  
+   
+ .events li a {  
+    justify-content: space-between; 
+    padding: 30px 30px; 
+    color: white;  
+    align-items:last baseline;   
+    text-decoration: none;
+    margin-bottom: none;
+    margin-top: -20px;
+    margin-left: 100px;
+ }  
+ .events li b {
+    color: white;  
+    align-items:last baseline; 
+    margin-left: 10px;
+    padding: 30px 20px; 
+    font-size: 0.8em;  
+    
+ }
+ .events li a:hover h3 {
+    color: #e6bf41; /* Change the text color on hover (can customize) */
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+ .events span {  
+    font-size: 0.8em;  
+    display: block;  
+ }  
+ .add-event-btn {
+    position: absolute; 
+    bottom: 20px;
+    right: 20px; 
+    background-color: #460971; 
+    color: white;
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.add-event-btn:hover {
+    background-color: #893498; /* Change color on hover */
+}
+
+   
+ @media (max-width: 768px) {  
+    .menu-toggle {  
+       display: block;  
+    }  
+    nav {  
+       display: none;  
+    }  
+ }

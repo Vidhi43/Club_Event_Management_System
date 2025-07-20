@@ -31,5 +31,7 @@ and activities.
      
 ## Research Paper
 **Title**: "Club Event Management System"
+
 **Published in**: International Journal of Advanced Research in Science, Communication and Technology, 2024
+
 **Link**: [https://ijarsct.co.in/Paper22465.pdf]
